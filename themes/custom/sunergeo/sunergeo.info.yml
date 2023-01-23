@@ -1,0 +1,18 @@
+name: sunergeo
+description: 'An example sunergeo.'
+type: theme
+package: Custom
+base theme: false
+core: 8.x
+core_version_requirement: ^8 || ^9
+
+libraries:
+  - sunergeo/global-styling
+
+regions:
+  header: 'Header'
+  menu: 'menu'
+  highlighted: Highlighted
+  breadcrumb: Breadcrumb
+  content: Content
+  footer: 'Footer'

@@ -1,0 +1,20 @@
+global-styling:
+  css:
+    theme:
+      css/bootstrap.min.css: {}
+      css/fonts.css: {}
+      css/responsive.css: {}
+      css/style.css: {}
+      js/owl-carousel/owl.carousel.css: {}
+      js/owl-carousel/owl.theme.css: {}
+      js/owl-carousel/owl.transitions: {}
+  js:
+    'https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js': { type: external }
+    'https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js': { type: external }
+    js/owl-carousel/owl.carousel.js: {}
+    js/owl-carousel/owl.carousel.min.js: {}
+    js/aos.js: {}
+    js/equal-height.js: {}
+    js/scripts.js: {}
+    
+  

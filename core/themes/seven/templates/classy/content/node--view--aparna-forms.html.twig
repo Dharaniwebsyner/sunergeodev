@@ -1,0 +1,154 @@
+
+
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/1.6.2/css/buttons.dataTables.min.css">
+
+
+{# <span class="newsletters_link"> Newsletters</span> || <span class="contactus_link"> Contact Us</span> || <span class="dealer_link"> Become a dealer</span> || <span class="careers_link"> Careers</span> #}
+
+ <h4>Newsletters</h4>
+<table class="newsletters table">
+    <thead>
+        <tr>
+            <th class="text-center">#</th>
+            <th class="text-center">Form Type</th>
+            <th class="text-center">email</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for newsletter in newsletters %}
+        <tr>
+            <td>{{loop.index}}</td>
+            <td>Newsletters</td>
+            <td>{{newsletter.newsletter_email}}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+<hr>
+<br>  
+
+<h4>Contact Us</h4>
+<table class="contactus table">
+    <thead>
+        <tr>
+            <th class="text-center">#</th>
+            <th class="text-center">Form Type</th>
+            <th class="text-center">First Name</th>
+            <th class="text-center">Last Name</th>
+            <th class="text-center">Email</th>
+            <th class="text-center">Phone</th>
+            <th class="text-center">Age</th>
+            <th class="text-center">Pincode</th>
+            <th class="text-center">Country</th>
+            <th class="text-center">Project</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for contact in contactus %}
+            <tr>
+                <td>{{loop.index}}</td>
+                <td>Contact Us</td>
+                <td>{{contact.contactus_fname}}</td>
+                <td>{{contact.contactus_lname}}</td>
+                <td>{{contact.contactus_email}}</td>
+                <td>{{contact.contactus_mobile}}</td>
+                <td>{{contact.contactus_age}}</td>
+                <td>{{contact.contactus_pincode}}</td>
+                <td>{{contact.contactus_country}}</td>
+                <td>{{contact.contactus_project}}</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+<hr>
+<br>
+{# <h4>Become a dealer</h4>
+<table class="dealer table">
+    <thead>
+        <tr>
+            <th class="text-center">#</th>
+            <th class="text-center">Form Type</th>
+            <th class="text-center">Name</th>
+            <th class="text-center">Email</th>
+            <th class="text-center">Phone</th>
+            <th class="text-center">Business Name</th>
+            <th class="text-center">City</th>
+            <th class="text-center">Message</th>
+        </tr> 
+    </thead>
+    <tbody>
+        {% for dealership in dealer %}
+        <tr>
+            <td>{{loop.index}}</td>
+            <td>Become a Dealer</td>
+            <td>{{dealership.becomedealer_name}}</td>
+            <td>{{dealership.becomedealer_email}}</td>
+            <td>{{dealership.becomedealer_number}}</td>
+            <td>{{dealership.becomedealer_businessname}}</td>
+            <td>{{dealership.becomedealer_city}}</td>
+            <td>{{dealership.becomedealer_message}}</td>
+        </tr>
+        {%endfor %}
+    </tbody>
+</table> 
+<hr>
+<br>#}
+<h4>Careers</h4>
+<table class="careers table">
+    <thead>
+        <tr>
+            <th class="text-center">#</th>
+            <th class="text-center">Form Type</th>
+            <th class="text-center">First Name</th>
+            <th class="text-center">Last Name</th>
+            <th class="text-center">Email</th>
+            <th class="text-center">Mobile</th>
+            <th class="text-center">Alternate Mobile</th>
+            <th class="text-center">Total Experience</th>
+            <th class="text-center">Qualification</th>
+            <th class="text-center">Current Location</th>
+            {# <th class="text-center">Industry</th> #}
+            <th class="text-center">Resume</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for career in careers %}
+            <tr>
+                <td>{{loop.index}}</td>
+                <td>Careers</td>
+                <td>{{career.carrers_fname}}</td>
+                <td>{{career.carrers_lname}}</td>
+                <td>{{career.carrers_email}}</td>
+                <td>{{career.carrers_mobile}}</td>
+                <td>{{career.carrers_mobilealt}}</td>
+                <td>{{career.carrers_totalexperience}}</td>
+                <td>{{career.carrers_qualification}}</td>
+                <td>{{career.carrers_currentlocation}}</td>
+                {# <td>{{career.carrers_industry}}</td> #}
+                <td><a href="{{career.carrers_file}}" target="_blank"> Resume </a></td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.6.2/js/dataTables.buttons.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.6.2/js/buttons.flash.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.6.2/js/buttons.html5.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.6.2/js/buttons.print.min.js"></script>
+<script>
+    jQuery(document).ready(function($) {
+        $('.table').DataTable( {
+        dom: 'Bfrtip',
+        buttons: [
+            'copy', 'csv', 'excel', 'pdf', 'print'
+        ]
+    } );
+    });
+</script>

@@ -1,0 +1,892 @@
+<?php
+/**
+ * Implements template_preprocess_page().
+ */
+
+function aparna_preprocess_page__front(&$variables){
+
+    $menu_query = \Drupal::entityTypeManager()->getStorage('node')->getQuery();
+    $menu_query_nids = $menu_query->condition('type', 'menu_one');
+    $menu_queryids = $menu_query_nids->sort('field_menu_one_order', 'ASC')->execute();
+    $menu_nodes = \Drupal\node\Entity\Node::loadMultiple($menu_queryids);
+    $variables['menu_data'] = $menu_nodes;
+    $variables['menu_h_data'] = $variables['menu_data'];
+    foreach ($variables['menu_h_data'] as $key => $value) {
+        $variables['menu_data_s'][] = $value;
+    }
+
+    $menus_query = \Drupal::entityTypeManager()->getStorage('node')->getQuery();
+    $menus_query_nids = $menus_query->condition('type', 'menu_two');
+    $menus_queryids = $menus_query_nids->sort('field_menu_two_order', 'ASC')->execute();
+    $menus_nodes = \Drupal\node\Entity\Node::loadMultiple($menus_queryids);
+    $variables['menus_data'] = $menus_nodes;
+    $variables['menus_h_data'] = $variables['menus_data'];
+    foreach ($variables['menus_h_data'] as $key => $value) {
+        $variables['menus_data_s'][] = $value;
+    }
+
+    $hl_query = \Drupal::entityTypeManager()->getStorage('node')->getQuery();
+    $fhl_query_nids = $hl_query->condition('type', 'site_setting')->execute();
+    $hl_nodes = \Drupal\node\Entity\Node::loadMultiple($fhl_query_nids);
+    $variables['hl_data'] = $hl_nodes;
+    $variables['sl_hl_data'] = $variables['hl_data'];
+    foreach ($variables['sl_hl_data'] as $key => $value) {
+        $variables['hl_data_sl'][] = $value;
+    }
+
+    // Happy Customer Section
+    $hc_query = \Drupal::entityTypeManager()->getStorage('node')->getQuery();
+    $hc_nids = $hc_query->condition('type', 'home_happy_customer')->execute();
+    $hc_nodes = \Drupal\node\Entity\Node::loadMultiple($hc_nids);
+    $variables['hc_data'] = $hc_nodes;
+    $variables['hc_hp_data'] = $variables['hc_data'];
+    foreach ($variables['hc_hp_data'] as $key => $value) {
+        $variables['f_data_hc'][] = $value;
+    }
+
+    //Upcoming Project Section
+    $up_query = \Drupal::entityTypeManager()->getStorage('node')->getQuery();
+    $up_nids = $up_query->condition('type', 'home_upcoming_projects')->execute();
+    $up_nodes = \Drupal\node\Entity\Node::loadMultiple($up_nids);
+    $variables['up_data'] = $up_nodes;
+    $variables['up_hp_data'] = $variables['up_data'];
+    foreach ($variables['up_hp_data'] as $key => $value) {
+        $variables['f_data_up'][] = $value;
+    }
+
+    // History Projects
+    $fh_query = \Drupal::entityTypeManager()->getStorage('node')->getQuery();
+    $fh_nids = $fh_query->condition('type', 'home_history')->execute();
+    $fh_nodes = \Drupal\node\Entity\Node::loadMultiple($fh_nids);
+    $variables['fp_data'] = $fh_nodes;
+    $variables['fg_ph_data'] = $variables['fp_data'];
+    foreach ($variables['fg_ph_data'] as $key => $value) {
+        $variables['f_data_fh'][] = $value;
+    }
+
+}
+
+function aparna_preprocess_page(&$variables){
+
+    $mn_query = \Drupal::entityTypeManager()->getStorage('node')->getQuery();
+    $mn_query_nids = $mn_query->condition('type', 'menu_one');
+    $mn_queryids = $mn_query_nids->sort('field_menu_one_order', 'ASC')->execute();
+    $mn_nodes = \Drupal\node\Entity\Node::loadMultiple($mn_queryids);
+    $variables['mn_data'] = $mn_nodes;
+    $variables['mn_h_data'] = $variables['mn_data'];
+    foreach ($variables['mn_h_data'] as $key => $value) {
+        $variables['mn_data_s'][] = $value;
+    }
+
+    $mns_query = \Drupal::entityTypeManager()->getStorage('node')->getQuery();
+    $mns_query_nids = $mns_query->condition('type', 'menu_two');
+    $mns_queryids = $mns_query_nids->sort('field_menu_two_order', 'ASC')->execute();
+    $mns_nodes = \Drupal\node\Entity\Node::loadMultiple($mns_queryids);
+    $variables['mns_data'] = $mns_nodes;
+    $variables['mns_h_data'] = $variables['mns_data'];
+    foreach ($variables['mns_h_data'] as $key => $value) {
+        $variables['mns_data_s'][] = $value;
+    }
+
+    $hl_query = \Drupal::entityTypeManager()->getStorage('node')->getQuery();
+    $fhl_query_nids = $hl_query->condition('type', 'site_setting')->execute();
+    $hl_nodes = \Drupal\node\Entity\Node::loadMultiple($fhl_query_nids);
+    $variables['hl_data'] = $hl_nodes;
+    $variables['sl_hl_data'] = $variables['hl_data'];
+    foreach ($variables['sl_hl_data'] as $key => $value) {
+        $variables['hl_data_sl'][] = $value;
+    }
+
+}
+
+function aparna_preprocess_region__header(&$variables) {
+
+    $hl_query = \Drupal::entityTypeManager()->getStorage('node')->getQuery();
+    $fhl_query_nids = $hl_query->condition('type', 'site_setting')->execute();
+    $hl_nodes = \Drupal\node\Entity\Node::loadMultiple($fhl_query_nids);
+    $variables['hl_data'] = $hl_nodes;
+    $variables['sl_hl_data'] = $variables['hl_data'];
+    foreach ($variables['sl_hl_data'] as $key => $value) {
+        $variables['hl_data_sl'][] = $value;
+    }
+
+}
+
+function aparna_preprocess_region__footer1(&$variables) {
+
+    $f1_query = \Drupal::entityTypeManager()->getStorage('node')->getQuery();
+    $f1_nids = $f1_query->condition('type', 'footer_address_section')->execute();
+    $f1_nodes = \Drupal\node\Entity\Node::loadMultiple($f1_nids);
+    $variables['f1_data'] = $f1_nodes;
+    $variables['sl_f1_data'] = $variables['f1_data'];
+    foreach ($variables['sl_f1_data'] as $key => $value) {
+        $variables['f1_data_sl'][] = $value;
+    }
+
+}
+function aparna_preprocess_node__news_inner(&$variables) {
+        
+        //News Inner Feautured
+        $newsinner_query = \Drupal::entityTypeManager()->getStorage('node')->getQuery();
+        $newsinner_nids = $newsinner_query->condition('type', 'featured_news')->execute();
+        $newsinner_nodes = \Drupal\node\Entity\Node::loadMultiple($newsinner_nids);
+        $variables['newsinner_data'] = $newsinner_nodes;
+        $variables['newsinner_ph_data'] = $variables['newsinner_data'];
+        foreach ($variables['newsinner_ph_data'] as $key => $value) {
+            $variables['newsinner_data_fh'][] = $value;
+            $nid = $value->nid->value;
+            $path = '/node/' . (int) $nid;
+            $langcode = \Drupal::languageManager()->getCurrentLanguage()->getId();
+            $path_alias = \Drupal::service('path_alias.manager')->getAliasByPath($path, $langcode);
+            $variables['news_feature_data_path'][] = ["path" => $path_alias, "nid" => $nid];
+        }
+}
+function aparna_preprocess_node__news(&$variables) {
+        
+        //News
+        $news_query = \Drupal::entityTypeManager()->getStorage('node')->getQuery();
+        $news_nids = $news_query->condition('type', 'news_inner')->sort('field_latest_news_order', 'ASC')->execute();
+        $news_nodes = \Drupal\node\Entity\Node::loadMultiple($news_nids);
+        $variables['news_data'] = $news_nodes;
+        $variables['news_ph_data'] = $variables['news_data'];
+        foreach ($variables['news_ph_data'] as $key => $value) {
+            $variables['news_data_fh'][] = $value;
+            $nid = $value->nid->value;
+            $path = '/node/' . (int) $nid;
+            $langcode = \Drupal::languageManager()->getCurrentLanguage()->getId();
+            $path_alias = \Drupal::service('path_alias.manager')->getAliasByPath($path, $langcode);
+            $variables['news_data_path'][] = ["path" => $path_alias, "nid" => $nid];
+        }
+}
+
+function aparna_preprocess_region__footer2(&$variables) {
+
+    $f2_query = \Drupal::entityTypeManager()->getStorage('node')->getQuery();
+    $f2_nids = $f2_query->condition('type', 'footer_menu_one')->execute();
+    $f2_nodes = \Drupal\node\Entity\Node::loadMultiple($f2_nids);
+    $variables['f2_data'] = $f2_nodes;
+    $variables['sl_f2_data'] = $variables['f2_data'];
+    foreach ($variables['sl_f2_data'] as $key => $value) {
+        $variables['f2_data_sl'][] = $value;
+    }
+}
+
+function aparna_preprocess_region__footer6(&$variables) {
+
+    $f6_query = \Drupal::entityTypeManager()->getStorage('node')->getQuery();
+    $f6_nids = $f6_query->condition('type', 'site_setting')->execute();
+    $f6_nodes = \Drupal\node\Entity\Node::loadMultiple($f6_nids);
+    $variables['f6_data'] = $f6_nodes;
+    $variables['sl_f6_data'] = $variables['f6_data'];
+    foreach ($variables['sl_f6_data'] as $key => $value) {
+        $variables['f6_data_sl'][] = $value;
+    }
+}
+
+function aparna_preprocess_region__footer7(&$variables) {
+
+    $f7_query = \Drupal::entityTypeManager()->getStorage('node')->getQuery();
+    $f7_nids = $f7_query->condition('type', 'get_free_quote')->execute();
+    $f7_nodes = \Drupal\node\Entity\Node::loadMultiple($f7_nids);
+    $variables['f7_data'] = $f7_nodes;
+    $variables['sl_f7_data'] = $variables['f7_data'];
+    foreach ($variables['sl_f7_data'] as $key => $value) {
+        $variables['f7_data_sl'][] = $value;
+    }
+
+}
+
+function aparna_preprocess_region__footer8(&$variables) {
+
+    $sl_query = \Drupal::entityTypeManager()->getStorage('node')->getQuery();
+    $sl_nids = $sl_query->condition('type', 'social_links')->execute();
+    $sl_nodes = \Drupal\node\Entity\Node::loadMultiple($sl_nids);
+    $variables['sl_data'] = $sl_nodes;
+    $variables['sl_f8_data'] = $variables['sl_data'];
+    foreach ($variables['sl_f8_data'] as $key => $value) {
+        $variables['f_data_sl'][] = $value;
+    }
+
+}
+
+function aparna_preprocess_node__contact_us(&$variables) {
+        //Contact Us 
+    $cs_query = \Drupal::entityTypeManager()->getStorage('node')->getQuery();
+    $cs_nids = $cs_query->condition('type', 'contact_us')->execute();
+    $cs_nodes = \Drupal\node\Entity\Node::loadMultiple($cs_nids);
+    $variables['cs_data'] = $cs_nodes;
+    $variables['cs_ph_data'] = $variables['cs_data'];
+
+    //Contact Maps
+    $cm_query = \Drupal::entityTypeManager()->getStorage('node')->getQuery();
+    $cm_nids = $cm_query->condition('type', 'contact_map')->execute();
+    $cm_nodes = \Drupal\node\Entity\Node::loadMultiple($cm_nids);
+    $variables['cm_data'] = $cm_nodes;
+    $variables['cm_ph_data'] = $variables['cm_data'];
+    foreach ($variables['cm_ph_data'] as $key => $value) {
+        $variables['cm_data_fh'][] = $value;
+    }
+        $email_details = \Drupal\node\Entity\Node::load(81);
+        $from_email = $email_details->field_from_contact_email[0]->value;
+        //echo 'From Email'.$from_email;
+        $to_email = $email_details->field_to_contact_email[0]->value;
+        $email = \Drupal::request()->request->get('email');
+
+    if($email) {
+
+        $firstname = \Drupal::request()->request->get('firstname');
+        //echo "firstname".$firstname;
+        $lastname = \Drupal::request()->request->get('lastname');
+         //echo "lastname".$lastname;
+        $email = \Drupal::request()->request->get('email');
+        //echo "email".$email;
+        $mobile = \Drupal::request()->request->get('mobile');
+        //echo "mobile".$mobile;
+        $age = \Drupal::request()->request->get('age');
+        //echo "age ".$age;
+        $pincode = \Drupal::request()->request->get('pincode');
+        //echo "pincode".$pincode;
+        $country = \Drupal::request()->request->get('country');
+        //echo "country".$country;
+        $project  = \Drupal::request()->request->get('project');
+
+       
+
+        
+          $database = \Drupal::database();
+        //save to database
+        try{
+            // echo "insert";
+            $result = $database->insert('aparna_form')
+              ->fields([
+                'form_type' => "contactus",
+                'contactus_fname' => "$firstname",
+                'contactus_lname' => "$lastname",
+                'contactus_email' => "$email",
+                'contactus_mobile' => "$mobile",
+                'contactus_age' => "$age",
+                'contactus_pincode' => "$pincode",
+                'contactus_country' => "$country",
+                'contactus_project' => "$project",
+                // 'contactus_project' => "$industry",
+               // 'carrers_file' => "$file",
+              ])
+              ->execute();
+        }catch(Exception $e) {
+           // echo "Error";
+            \Drupal::logger('widget')->error($e->getMessage());
+        }
+         $send_mail = new \Drupal\Core\Mail\Plugin\Mail\PhpMail(); // this is used to send HTML emails
+         //echo "<pre>";echo "sendmail1";print_r($send_mail);echo "</pre>";
+        $message['headers'] = array(
+        'content-type' => 'text/html',
+        'MIME-Version' => '1.0',
+        'reply-to' => $from_email,
+        'from' => 'Aparna Constructions <'.$from_email.'>'
+        );
+         //echo "project".$project;
+        $message['to'] = $to_email;
+        $message['subject'] = "Contact Us - Submission";
+        $message['body'] = 'Hello,'. $firstname.''. ' has submitted a contact us form, here are the details. <br/>
+        Name: '.  $firstname .''.$lastname.'
+        <br/>Email: '.  $email .'
+        <br/>Mobile: '.  $mobile .'.
+        <br/>Age: '.  $age .'.
+        <br/>Pincode: '.  $pincode .'.
+        <br/>Project: '.  $project .'.
+        <br/>country: '.  $country ;
+
+        $variables['thankyou_message'] = "Thank you! Your message has been sent.";
+        $mail_sent = $send_mail->mail($message);
+        if($mail_sent){
+           // / echo "mail dent";
+            //$url = $_SERVER['HTTP_URI'] . "?fs=success";  
+            //$url = $_SERVER['HTTP_URI'] . "/contact-thank-you";
+            //header("location: $url");
+        }
+
+    }
+}
+
+function aparna_preprocess_node__careers_page(&$variables) {
+       
+
+        //Careers Page
+        $car_query = \Drupal::entityTypeManager()->getStorage('node')->getQuery();
+        $car_nids = $car_query->condition('type', 'careers_page')->execute();
+        $car_nodes = \Drupal\node\Entity\Node::loadMultiple($car_nids);
+        $variables['car_data'] = $car_nodes;
+        $variables['car_ph_data'] = $variables['car_data'];
+    
+        //Career Openings
+        $crop_query = \Drupal::entityTypeManager()->getStorage('node')->getQuery();
+        $crop_nids = $crop_query->condition('type', 'carrer_openings')->execute();
+        $crop_nodes = \Drupal\node\Entity\Node::loadMultiple($crop_nids);
+        $variables['crop_data'] = $crop_nodes;
+        $variables['crop_ph_data'] = $variables['crop_data'];
+        foreach ($variables['crop_ph_data'] as $key => $value) {
+                $variables['crop_data_fh'][] = $value;
+        }
+
+        //Why Aparna Section
+        $crwhy_query = \Drupal::entityTypeManager()->getStorage('node')->getQuery();
+        $crwhy_nids = $crwhy_query->condition('type', 'carrer_why_aparna_section')->range(0, 4)->execute();
+        $crwhy_nodes = \Drupal\node\Entity\Node::loadMultiple($crwhy_nids);
+        $variables['crwhy_data'] = $crwhy_nodes;
+        $variables['crwhy_ph_data'] = $variables['crwhy_data'];
+        foreach ($variables['crwhy_ph_data'] as $key => $value) {
+                $variables['crwhy_data_fh'][] = $value;
+        }
+
+        // $crtsmial_query = \Drupal::entityTypeManager()->getStorage('node')->getQuery();
+        // $crtsmial_nids = $crtsmial_query->condition('type', 'career_testimonial')->sort('field_order', 'ASC')->execute();
+        // $crtsmial_nodes = \Drupal\node\Entity\Node::loadMultiple($crtsmial_nids);
+        // $variables['crtsmial_data'] = $crtsmial_nodes;
+        // $variables['crtsmial_ph_data'] = $variables['crtsmial_data'];
+        // foreach ($variables['crtsmial_ph_data'] as $key => $value) {
+        //         $variables['crtsmial_data_fh'][] = $value;
+        // }
+         $crtsmial_query = \Drupal::entityTypeManager()->getStorage('node')->getQuery();
+
+        $crtsmial_nids = $crtsmial_query->condition('type', 'career_testimonial')->sort('field_order', 'ASC')->range(0, 4)->execute();
+
+        $crtsmial_nodes = \Drupal\node\Entity\Node::loadMultiple($crtsmial_nids);
+        $variables['crtsmial_data'] = $crtsmial_nodes;
+        $variables['crtsmial_ph_data'] = $variables['crtsmial_data'];
+
+        foreach ($variables['crtsmial_ph_data'] as $key => $value) {
+                $variables['crtsmial_data_fh'][] = $value;
+
+        
+        } 
+        
+
+        $crtsmial_nids_1 = $crtsmial_query->condition('type', 'career_testimonial')->sort('field_order', 'ASC')->range(4, 8)->execute();
+        $crtsmial_nodes_1 = \Drupal\node\Entity\Node::loadMultiple($crtsmial_nids_1);
+        $variables['crtsmial_data_1'] = $crtsmial_nodes_1;
+        $variables['crtsmial_ph_data_1'] = $variables['crtsmial_data_1'];
+
+        foreach ($variables['crtsmial_ph_data_1'] as $key => $value) {
+                $variables['crtsmial_data_fh_1'][] = $value;
+        } 
+
+        $crtsmial_nids_1 = $crtsmial_query->condition('type', 'career_testimonial')->sort('field_order', 'ASC')->range(8, 12)->execute();
+        $crtsmial_nodes_1 = \Drupal\node\Entity\Node::loadMultiple($crtsmial_nids_1);
+        $variables['crtsmial_data_2'] = $crtsmial_nodes_1;
+        $variables['crtsmial_ph_data_2'] = $variables['crtsmial_data_1'];
+
+        foreach ($variables['crtsmial_ph_data_2'] as $key => $value) {
+                $variables['crtsmial_data_fh_2'][] = $value;
+        } 
+
+
+        // echo '<pre>';print_r($variables['crtsmial_data_fh']);echo '</pre>';exit;
+        $email_details = \Drupal\node\Entity\Node::load(62);
+        $from_email = $email_details->field_from_email[0]->value;
+       // echo 'From Email'.$from_email;
+        $to_email = $email_details->field_to_email[0]->value;
+        //echo 'To Email'.$to_email;
+        $email = \Drupal::request()->request->get('email');
+
+    if($email) {
+
+        $mobile = \Drupal::request()->request->get('mobile');
+      //  echo "mobile".$mobile;
+        $alt_mobile = \Drupal::request()->request->get('alt_mobile');
+        // echo "alternative mobile".$alt_mobile;
+        $tot_exp = \Drupal::request()->request->get('tot_exp');
+        //echo "total exp".$tot_exp;
+        $qualification = \Drupal::request()->request->get('qualification');
+        //echo "qualification".$qualification;
+        $industry = \Drupal::request()->request->get('industry');
+        //echo "industry ".$industry;
+        $cur_loc = \Drupal::request()->request->get('cur_loc');
+        //echo "cur_loc".$cur_loc;
+        $firstname = \Drupal::request()->request->get('firstname');
+        //echo "firstname".$firstname;
+        $lastname  = \Drupal::request()->request->get('lastname');
+         //echo "lastname".$lastname;
+         $myfile  = \Drupal::request()->request->get('myfile');
+
+          $file = \Drupal::entityTypeManager()->getStorage('file')->load($_FILES["myfile"][0]);
+
+         //echo "file"; var_dump($file); //exit;
+
+        // echo "filr"; print_r($file); exit;
+        
+        $send_mail = new \Drupal\Core\Mail\Plugin\Mail\PhpMail(); // this is used to send HTML emails
+         //echo "<pre>";echo "sendmail1";print_r($send_mail);echo "</pre>";
+        $message['headers'] = array(
+        'content-type' => 'text/html',
+        'MIME-Version' => '1.0',
+        'reply-to' => $from_email,
+        'from' => 'Aparna Constructions <'.$from_email.'>'
+        );
+          //echo "<pre>";echo "message headers";print_r($message['headers']);echo "</pre>";exit;
+        //echo "<pre>";print_r();
+        $message['to'] = $to_email;
+       // echo "Message".$message['to'];
+        $message['subject'] = "Carrers Application Submitted";
+          //echo "Message".$message['subject'];
+        //$base_url = base_url();
+
+        $target_dir = "http://aparnadev.devtpit.com/sites/default/files/careers/";
+        //echo "<pre>";echo "message headers";print_r($target_dir);echo "</pre>";exit;
+
+        $target_file = $target_dir . basename($_FILES["myfile"]["name"]);
+        //echo "<pre>";echo "message headers";print_r($target_file);echo "</pre>";exit;
+
+        $separator = md5(time());
+        //echo "<pre>";echo "message headers";print_r($separator);echo "</pre>";exit;
+        $uploads_dir = '/uploads';
+        //echo "<pre>";echo "message headers";print_r($uploads_dir);echo "</pre>";exit;
+        $orginal_file_name = $_FILES["myfile"]["name"];
+        //echo "<pre>";echo "message headers";print_r($orginal_file_name);echo "</pre>";exit;
+        $name = str_replace(" ","-",$orginal_file_name);
+         //echo "<pre>";echo "message name";print_r($name);echo "</pre>";exit;
+         //print_r($file_name); exit;
+         $name = basename($_FILES["myfile"]["name"]);
+         //echo "<pre>";echo "message namee";print_r($name);echo "</pre>";exit;
+         $moved = move_uploaded_file($_FILES["myfile"]["tmp_name"], "$name" );
+          //echo "sdad"; print_r($moved); exit;
+         //echo "sdad"; print_r($name); //exit;
+ 
+        $upload_dir = $_SERVER['DOCUMENT_ROOT'] . "\uploads";
+         //echo "upload_dir"; print_r($upload_dir); exit;
+          if (is_dir($upload_dir) && is_writable($upload_dir)) {
+               //do upload logic here
+            // echo 'Upload directory is  writable, or does  exist.';
+
+         } else { 
+            // echo 'Upload directory is not writable, or does not exist.';
+         }
+         if( $moved ) {
+            //echo "Successfully uploaded";         
+          } else {
+          // echo "Not uploaded because of errsor # ".$_FILES["myfile"]["error"];
+          }
+          $filename = "$name";
+           //echo "<pre>";echo "message name";print_r($filename);echo "</pre>";exit;
+          $path = 'http://aparnadev.devtpit.com/';
+          //echo "<pre>";echo "message name";print_r($path);echo "</pre>";exit;
+         $file = $path . "/" . $filename;
+        // / echo "<pre>";echo "message naxme";print_r($file);echo "</pre>";exit;
+        $database = \Drupal::database();
+        //save to database
+        try{
+             //echo "insert";
+            $result = $database->insert('aparna_form')
+              ->fields([
+                'form_type' => "careers",
+                'carrers_fname' => "$firstname",
+                'carrers_lname' => "$lastname",
+                'carrers_email' => "$email",
+                'carrers_mobile' => "$mobile",
+                'carrers_mobilealt' => "$alt_mobile",
+                'carrers_totalexperience' => "$tot_exp",
+                'carrers_qualification' => "$qualification",
+                'carrers_currentlocation' => "$cur_loc",
+                 //'carrers_industry' => "$industry",
+                 'carrers_file' => "$file",
+              ])
+              ->execute();
+        }catch(Exception $e) {
+           // echo "Error";
+            \Drupal::logger('widget')->error($e->getMessage());
+        }
+
+        $message['body'] = 'Hello,'. $email. ' has submitted an application for a job posting. <br/>
+        First Name: '.  $firstname . '
+        <br/>Last Name : '.  $lastname .'
+        <br/>Email: '.  $email .'
+        <br/>Phone Number: '.  $mobile .'
+        <br/>Current Location: '.  $cur_loc .'.
+        <br/>Qualification: '.  $qualification .'.
+        <br/>Total Experience: '.  $tot_exp;
+        //echo "<pre>";echo "message headers";print_r($message['body']);echo "</pre>";exit;
+        //$message['attachments'] = $target_file;
+       // $send_mail->mail($message);
+        $eol = "\r\n";
+        
+
+        $mailto = "$to_email";
+        $subject = 'Carrers Application Submitted';
+        $message = 'Hello,'. $email. ' has submitted an applicatioon for a job posting. ' . $eol.
+        'First Name: '.  $firstname . $eol.
+        'Last Name : '.  $lastname . $eol.
+        'Email: '.  $email . $eol.
+        'Phone Number: '.  $mobile . $eol.
+        'Alternate Number: '.  $alt_mobile . $eol.
+        'Industry: '.  $industry . $eol.
+        'Current Location: '.  $cur_loc . $eol.
+        'Qualification: '.  $qualification . $eol.
+        'Total Experience: '.  $tot_exp;
+          //echo "<pre>";echo "messagdata";print_r($message);echo "</pre>";exit;
+         $content = file_get_contents($file);
+         //echo "<pre>";echo "content";print_r($content);echo "</pre>";exit;
+         $content = chunk_split(base64_encode($content));
+         //echo "<pre>";echo "contents";print_r($content);echo "</pre>";exit;
+
+        // a random hash will be necessary to send mixed content
+        $separator = md5(time());
+        // echo "<pre>";echo "separator";print_r($separator);echo "</pre>";exit;
+        // carriage return type (RFC)
+        $eol = "\r\n";
+
+       // main header (multipart mandatory)
+        $headers = "From: $from_email" . $eol;
+        $headers .= "MIME-Version: 1.0" . $eol;
+        $headers .= "Content-Type: multipart/mixed; boundary=\"" . $separator . "\"" . $eol;
+        $headers .= "Content-Transfer-Encoding: 7bit" . $eol;
+        $headers .= "This is a MIME encoded message." . $eol;
+         
+        // message
+        $body = "--" . $separator . $eol;
+        $body .= "Content-Type: text/plain; charset=\"iso-8859-1\"" . $eol;
+        $body .= "Content-Transfer-Encoding: 8bit" . $eol;
+        $body .= $message . $eol;
+       // echo "<pre>";echo "bodydata";print_r($body);echo "</pre>";exit;
+        // attachment
+        $body .= "--" . $separator . $eol;
+        $body .= "Content-Type: application/octet-stream; name=\"" . $filename . "\"" . $eol;
+        $body .= "Content-Transfer-Encoding: base64" . $eol;
+        $body .= "Content-Disposition: attachment" . $eol;
+        $body .= $content . $eol;
+        $body .= "--" . $separator . "--";
+      //  echo "<pre>";echo "bodydata";print_r($body);echo "</pre>";exit;
+        //SEND Mail
+        // echo"<pre>";echo "Mailto";print_r($mailto);echo "</pre>";
+        // echo"<pre>";echo "Subject";print_r($subject);echo "</pre>";
+        // echo"<pre>";echo "Body";;print_r($body);echo "</pre>";        
+        //  echo"<pre>";echo "headers";print_r($headers);echo "</pre>"; exit;
+        if (mail($mailto, $subject, $body, $headers)) {
+           // echo "mail send ... OK"; exit;// or use booleans here
+             // $url = $_SERVER['HTTP_URI'] . "?fs=success";  
+           // $url = $_SERVER['HTTP_URI'] . "/careers-thank-you";
+           // header("location: $url");
+        } else {
+            //echo "mail send ... ERROR!";
+           // print_r( error_get_last() ); exit;
+        }
+    }
+
+}
+
+function aparna_preprocess_node__projects_page(&$variables) {
+        
+    $query_p = \Drupal::entityTypeManager()->getStorage('node')->getQuery()->condition('type', 'projects')->execute();
+    $p_nodes = \Drupal\node\Entity\Node::loadMultiple($query_p);
+    $variables['p_data'] = $p_nodes;
+    $variables['p_all_data'] = $variables['p_data'];
+    foreach ($variables['p_all_data'] as $key => $value) {
+        $variables['project_list'][] = $value;
+    }
+
+    // echo '<pre>';print_r($variables['project_list']);echo '</pre>';exit;
+
+}
+
+function aparna_preprocess_node__projects(&$variables) {
+
+    $nid = $variables['node']->nid->value;
+
+    //Project Overview List
+    $query_ol = \Drupal::entityTypeManager()->getStorage('node')->getQuery()->condition('type', 'project_overview_details');
+    $group_ol = $query_ol->orConditionGroup()->condition('field_project_select_overivew.target_id', $nid, 'CONTAINS');
+    $nids = $query_ol->condition($group_ol)->execute();
+    $ol_nodes = \Drupal\node\Entity\Node::loadMultiple($nids);
+    $variables['ol_data'] = $ol_nodes;
+    $variables['ps_ol_data'] = $variables['ol_data'];
+    foreach ($variables['ps_ol_data'] as $key => $value) {
+        $variables['project_overview_list'][] = $value;
+    }
+
+    //Project Gallery Section
+    $query_gy = \Drupal::entityTypeManager()->getStorage('node')->getQuery()->condition('type', 'project_gallery');
+    $group_gy = $query_gy->orConditionGroup()->condition('field_select_project_gallery.target_id', $nid, 'CONTAINS');
+    $nids = $query_gy->condition($group_gy)->execute();
+    $gy_nodes = \Drupal\node\Entity\Node::loadMultiple($nids);
+    $variables['gy_data'] = $gy_nodes;
+    $variables['ps_gy_data'] = $variables['gy_data'];
+    foreach ($variables['ps_gy_data'] as $key => $value) {
+        $variables['project_gallery'][] = $value;
+    }
+
+    // Amenities Section
+    $query_am = \Drupal::entityTypeManager()->getStorage('node')->getQuery()->condition('type', 'project_amenities_section');
+    $group_am = $query_am->orConditionGroup()->condition('field_am_project_select.target_id', $nid, 'CONTAINS');
+    $nids = $query_am->condition($group_am)->execute();
+    $am_nodes = \Drupal\node\Entity\Node::loadMultiple($nids);
+    $variables['am_data'] = $am_nodes;
+    $variables['ps_am_data'] = $variables['am_data'];
+    foreach ($variables['ps_am_data'] as $key => $value) {
+        $variables['project_amenities'][] = $value;
+    }
+
+    // echo "<pre>";print_r($variables['project_amenities']);echo"</pre>";exit;
+
+    // Construction Updates Section
+    $query_cu = \Drupal::entityTypeManager()->getStorage('node')->getQuery()->condition('type', 'construction_updates_section');
+    $group_cu = $query_cu->orConditionGroup()->condition('field_project_construction.target_id', $nid, 'CONTAINS');
+    $nids = $query_cu->condition($group_cu)->execute();
+    $cu_nodes = \Drupal\node\Entity\Node::loadMultiple($nids);
+    $variables['cu_data'] = $cu_nodes;
+    $data_cu = array();
+    foreach ($variables['cu_data'] as $key => $value) {
+        $data_cu[$value->field_view_list->value][] = [
+            'nid' => $value->nid->value,
+            'description' => $value->field_construction_description[0]->value,
+            'image' => $value->get('field_view_image')->entity->uri->value
+        ];
+
+    }
+    $variables['construction'] = $data_cu;
+
+    // Specifications Section
+    $query_sp = \Drupal::entityTypeManager()->getStorage('node')->getQuery()->condition('type', 'specifications');
+    $group_sp = $query_sp->orConditionGroup()->condition('field_project_specifications.target_id', $nid, 'CONTAINS');
+    $nids = $query_sp->condition($group_sp)->execute();
+    $sp_nodes = \Drupal\node\Entity\Node::loadMultiple($nids);
+    $variables['sp_data'] = $sp_nodes;
+    foreach ($sp_nodes as $key => $value) {
+        $sp_d_res[] = [
+            'nid' => $value->nid->value,
+            'title' => $value->field_specifications_title[0]->value,
+            'description' => $value->field_specifications_details[0]->value
+
+        ];
+    }
+    $variables['sp_data_res'] = $sp_d_res;
+
+    //FAQ's Section
+    $query = \Drupal::entityTypeManager()->getStorage('node')->getQuery()->condition('type', 'faq_s');
+    $group = $query->orConditionGroup()->condition('field_select_project.target_id', $nid, 'CONTAINS');
+    $nids = $query->condition($group)->execute();
+    $faq_nodes = \Drupal\node\Entity\Node::loadMultiple($nids);
+    $variables['faq_data'] = $faq_nodes;
+    $variables['faq_n_data'] = $variables['faq_data'];
+    foreach ($faq_nodes as $key => $value) {
+        $faq_d_res[] = [
+            'nid' => $value->nid->value,
+            'title' => $value->field_question_faq[0]->value,
+            'description' => $value->field_answers_faq[0]->value
+
+        ];
+    }
+    $variables['faq_data_res'] = $faq_d_res;
+
+    // Floor Map Section
+    $query_pfm = \Drupal::entityTypeManager()->getStorage('node')->getQuery()->condition('type', 'project_floor_map_section');
+    $group_pfm = $query_pfm->orConditionGroup()->condition('field_project_select.target_id', $nid, 'CONTAINS');
+    $nids = $query_pfm->condition($group_pfm)->sort('field_floor_title', 'ASC')->execute();
+    $pfm_nodes = \Drupal\node\Entity\Node::loadMultiple($nids);
+    $variables['pfm_data'] = $pfm_nodes;
+    $data_pfm = array();
+    foreach ($variables['pfm_data'] as $key => $value) {
+        $data_pfm[$value->field_floor_title->value][] = [
+            'nid' => $value->nid->value,
+            'title' => $value->field_floor_title[0]->value,
+            'image' => $value->get('field_floor_image')->entity->uri->value
+        ];
+    }
+    $variables['pfm_data'] = $data_pfm;
+    // '<pre>';print_r($variables['pfm_data']);echo'</pre>';exit;
+
+}
+
+function aparna_preprocess_node__nri(&$variables) {
+
+    //NRI
+    $nri_query = \Drupal::entityTypeManager()->getStorage('node')->getQuery();
+    $nri_nids = $nri_query->condition('type', 'nri')->execute();
+    $nri_nodes = \Drupal\node\Entity\Node::loadMultiple($nri_nids);
+    $variables['nri_data'] = $nri_nodes;
+    $variables['nri_ph_data'] = $variables['nri_data'];
+
+    //NRI Youtube Section
+    $hfy_query = \Drupal::entityTypeManager()->getStorage('node')->getQuery();
+    $hfy_nids = $hfy_query->condition('type', 'happy_family_youtube_videos')->execute();
+    $hfy_nodes = \Drupal\node\Entity\Node::loadMultiple($hfy_nids);
+    $variables['hfy_data'] = $hfy_nodes;
+    $variables['hfy_ph_data'] = $variables['hfy_data'];
+    foreach ($variables['hfy_ph_data'] as $key => $value) {
+        $variables['hfy_data_fh'][] = $value;
+
+    }
+
+    //NRI hep section
+    $nhc_query = \Drupal::entityTypeManager()->getStorage('node')->getQuery();
+    $nhc_nids = $nhc_query->condition('type', 'nri_help_content_type')->groupBy('field_nri_help_category')->execute();
+    $nhc_nodes = \Drupal\node\Entity\Node::loadMultiple($nhc_nids);
+    $variables['nhc_data'] = $nhc_nodes;
+    $variables['nhc_ph_data'] = $variables['nhc_data'];
+
+    $data = array();
+    foreach ($variables['nhc_ph_data'] as $key => $value) {
+        $data[$value->field_nri_help_category->value][] = [
+            'nid' => $value->nid->value,
+            'title' => $value->title->value,
+            'description' => $value->field_description[0]->value,
+            'image' => $value->get('field_nri_category_image')->entity->uri->value
+        ];
+
+    }
+    $variables['faq'] = $data;
+
+}
+
+function aparna_preprocess_node__blog_inner_page(&$variables) {
+        //Featured Blogs
+        $blog_inner_query = \Drupal::entityTypeManager()->getStorage('node')->getQuery();
+        $blog_inner_nids = $blog_inner_query->condition('type', 'featured_blog')->execute();
+        $blog_inner_nodes = \Drupal\node\Entity\Node::loadMultiple($blog_inner_nids);
+        $variables['blog_inner_data'] = $blog_inner_nodes;
+        $variables['featured_blog_ph_data'] = $variables['blog_inner_data'];
+
+        foreach ($variables['featured_blog_ph_data'] as $key => $value) {
+            $variables['featured_blog_data_fh'][] = $value;
+
+            $nid = $value->nid->value;
+            $path = '/node/' . (int) $nid;
+            $langcode = \Drupal::languageManager()->getCurrentLanguage()->getId();
+            $path_alias = \Drupal::service('path_alias.manager')->getAliasByPath($path, $langcode);
+            $variables['blog_data_path'][] = ["path" => $path_alias, "nid" => $nid];
+        }
+
+             // echo "<pre>";print_r($variables['featured_blog_data_fh']);exit();
+
+            //Blog Sidebar data
+            $blog_sidebar_query = \Drupal::entityTypeManager()->getStorage('node')->getQuery();
+            $blog_sidebar_nids = $blog_sidebar_query->condition('type', 'blog_inner_page')->execute();
+            $blog_sidebar_nodes = \Drupal\node\Entity\Node::loadMultiple($blog_sidebar_nids);
+            $variables['blog_sidebar_data'] = $blog_sidebar_nodes;
+            $variables['blog_sidebar_ph_data'] = $variables['blog_sidebar_data'];
+
+        foreach ($variables['blog_sidebar_ph_data'] as $key => $value) {
+
+
+            $nid = $value->nid->value;
+            $path = '/node/' . (int) $nid;
+            $langcode = \Drupal::languageManager()->getCurrentLanguage()->getId();
+            $path_alias = \Drupal::service('path_alias.manager')->getAliasByPath($path, $langcode);
+        // $variables['blog_data_path'][] = ["path" => $path_alias, "nid" => $nid];   
+
+            $data[$value->field_blog_tags->value][] = [
+                'tag' => $value->field_blog_tags->value,
+                'title' => $value->field_blog_title->value,
+                'description' => $value->field_blog_description[0]->value,
+                'image' => $value->get('field_blog_banner')->entity->uri->value,
+                'blog_data_path' => $path_alias,
+                'publish_date' => $value->field_publish_date->value
+            ];
+
+        }           
+            $variables['blog_sidebar_info'] = $data;
+
+            //echo "<pre>";print_r($variables['blog_sidebar_info']);exit();
+}
+
+function aparna_preprocess_node__blog(&$variables) {
+     $email_details = \Drupal\node\Entity\Node::load(106);
+    $from_email = $email_details->field_from_newsletter_email[0]->value;
+    $to_email = $email_details->field_to_newsletter_email[0]->value;
+
+    $email = \Drupal::request()->request->get('email');
+   // echo 'hii'.$email;
+
+    if($email) {
+        $database = \Drupal::database();
+        //save to database
+        try{
+            $result = $database->insert('aparna_form')
+              ->fields([
+                'form_type' => 'newsletter',
+                'newsletter_email' => $email,
+              ])
+              ->execute();
+        }catch(Exception $e) {
+            // Error
+            \Drupal::logger('widget')->error($e->getMessage());
+        }
+        $send_mail = new \Drupal\Core\Mail\Plugin\Mail\PhpMail(); // this is used to send HTML emails
+        $message['headers'] = array(
+        'content-type' => 'text/html',
+        'MIME-Version' => '1.0',
+        'reply-to' => $from_email,
+        'from' => 'Aparna Constructions <'.$from_email.'>'
+        );
+        $message['to'] = $to_email;
+        $message['subject'] = "Newsletter Subscription";
+
+        $message['body'] = 'Hello,'. $email. ' has subscribed to the newsletter.';
+
+        //$send_mail->mail($message);
+        $mail_sent = $send_mail->mail($message);
+        if($mail_sent){
+            //$url = $_SERVER['HTTP_URI'] . "?fs=success";
+          //  $url = $_SERVER['HTTP_URI'] . "/newsletter-thank-you";  
+            //header("location: $url");
+        }
+    }
+    //Blogs
+    $blog_query = \Drupal::entityTypeManager()->getStorage('node')->getQuery();
+    $blog_nids = $blog_query->condition('type', 'blog_inner_page')->execute();
+    $blog_nodes = \Drupal\node\Entity\Node::loadMultiple($blog_nids);
+    $variables['blog_data'] = $blog_nodes;
+    $variables['blog_ph_data'] = $variables['blog_data'];
+
+    foreach ($variables['blog_ph_data'] as $key => $value) {
+        $variables['blog_data_fh'][] = $value;
+
+        $nid = $value->nid->value;
+        $path = '/node/' . (int) $nid;
+        $langcode = \Drupal::languageManager()->getCurrentLanguage()->getId();
+        $path_alias = \Drupal::service('path_alias.manager')->getAliasByPath($path, $langcode);
+        $variables['blog_data_path'][] = ["path" => $path_alias, "nid" => $nid];
+    }
+
+    //Top views Blogs
+     $query_tvb = \Drupal::entityTypeManager()->getStorage('node')->getQuery()->condition('type', 'blog_inner_page');
+    $group_tvb = $query_tvb->orConditionGroup()->condition('field_select_top_viewed_blog.value', 'Yes', 'CONTAINS');
+    $nids = $query_tvb->condition($group_tvb)->sort('field_top_viewed_order', 'ASC')->execute();
+    $tvb_nodes = \Drupal\node\Entity\Node::loadMultiple($nids);
+    $variables['blog_tvb'] = $tvb_nodes;
+    $variables['blog_tvb_data'] = $variables['blog_tvb'];
+
+    foreach ($variables['blog_tvb_data'] as $key => $value) {
+
+        $variables['blog_tvb_data_fh'][] = $value;
+        $nid = $value->nid->value;
+        $path = '/node/' . (int) $nid;
+        $langcode = \Drupal::languageManager()->getCurrentLanguage()->getId();
+        $path_alias = \Drupal::service('path_alias.manager')->getAliasByPath($path, $langcode);
+        $variables['blog_tvb_data_path'][] = ["path" => $path_alias, "nid" => $nid];
+    }
+    //echo "<pre>";print_r($variables['blog_tvb_data']);echo "</pre>";exit;
+    //Latest News
+
+    $query_lnb = \Drupal::entityTypeManager()->getStorage('node')->getQuery()->condition('type', 'news_inner');
+    $group_lnb = $query_lnb->orConditionGroup()->condition('field_top_latest_news.value', 'Yes', 'CONTAINS');
+    $nids = $query_lnb->condition($group_lnb)->execute();
+    $lnb_nodes = \Drupal\node\Entity\Node::loadMultiple($nids);
+    $variables['news_data'] = $lnb_nodes;
+    $variables['news_ph_data'] = $variables['news_data'];
+
+    // $news_query = \Drupal::entityTypeManager()->getStorage('node')->getQuery();
+    // $news_nids = $news_query->condition('type', 'news_inner')->execute();
+    // $news_nodes = \Drupal\node\Entity\Node::loadMultiple($news_nids);
+    // $variables['news_data'] = $news_nodes;
+    // $variables['news_ph_data'] = $variables['news_data'];
+    foreach ($variables['news_ph_data'] as $key => $value) {
+        $variables['news_data_fh'][] = $value;
+        $nid = $value->nid->value;
+        $path = '/node/' . (int) $nid;
+        $langcode = \Drupal::languageManager()->getCurrentLanguage()->getId();
+        $path_alias = \Drupal::service('path_alias.manager')->getAliasByPath($path, $langcode);
+        $variables['news_data_path'][] = ["path" => $path_alias, "nid" => $nid];
+    }
+
+}
+
+
+?>

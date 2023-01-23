@@ -1,0 +1,12 @@
+PHP version: 7.3.6
+
+DB: dev_aparna
+
+Username: aparna
+Password: aparna@2021
+
+Username: saikumar
+Password: admin@123
+
+Username: vinayak
+Password: admin@123
